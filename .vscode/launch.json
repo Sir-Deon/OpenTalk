@@ -1,0 +1,10 @@
+{
+  "configurations": [
+    {
+      "type": "pwa-chrome",
+      "name": "http://~/Library/Android/sdk/emulator/emulator -list-avds",
+      "request": "launch",
+      "url": "http://~/Library/Android/sdk/emulator/emulator -list-avds"
+    }
+  ]
+}
