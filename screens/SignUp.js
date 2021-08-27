@@ -1,5 +1,12 @@
 import React from 'react';
-import {Text, StyleSheet, Image, TouchableOpacity, View} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  View,
+  StatusBar,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Register from '../components/Register';
 const SignUp = ({navigation}) => {
@@ -20,6 +27,7 @@ const SignUp = ({navigation}) => {
         <Image style={styles.logo} source={require('../assets/logo.png')} />
         <Text style={styles.title}>OpenTalk</Text>
       </LinearGradient>
+      <StatusBar backgroundColor="indigo" />
       <Register navigation={navigation} />
     </>
   );

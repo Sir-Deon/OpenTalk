@@ -25,7 +25,7 @@ const Comment = () => {
             <TouchableOpacity>
               <Icon name="chat-bubble-outline" color="#bbb" />
             </TouchableOpacity>
-            <Text style={{marginLeft: 10, color: '#bbb'}}>2</Text>
+            <Text style={{marginLeft: 10, color: '#bbb'}}>0</Text>
           </View>
           <View style={styles.likes}>
             <TouchableOpacity>

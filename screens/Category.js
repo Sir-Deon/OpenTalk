@@ -1,11 +1,17 @@
 import React from 'react';
-import {Text, StyleSheet, Image, TouchableOpacity, View} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  View,
+  StatusBar,
+} from 'react-native';
 import {Icon} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import ChooseCategory from '../components/ChooseCategory';
 const Category = ({navigation}) => {
   const route = () => {
-    console.log('Hiiii');
     navigation.push('Follow');
   };
   return (
@@ -25,6 +31,7 @@ const Category = ({navigation}) => {
         <Text style={styles.title}>OpenTalk</Text>
       </LinearGradient>
       <ChooseCategory navigation={navigation} />
+      <StatusBar backgroundColor="indigo" />
     </>
   );
 };

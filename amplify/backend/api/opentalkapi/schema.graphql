@@ -1,0 +1,49 @@
+type User
+  @model
+  @key(name: "userByEmail", fields: ["email"], queryField: "userByEmail") {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  followers: [Followers] @connection(name: "UserFollowers")
+  following: [Following] @connection(name: "UserFollowing")
+  posts: [Post] @connection(name: "UserPosts", sortField: "createdAt")
+}
+
+type Post @model {
+  id: ID!
+  user: User @connection(name: "UserPosts", sortField: "createdAt")
+  text: String!
+  image: String!
+  likes: Likes @connection(name: "PostLikes")
+  createdAt: String!
+  comments: [Comment] @connection(name: "PostComments")
+}
+
+type Comment @model {
+  id: ID!
+  text: String!
+  image: String!
+  likes: Likes @connection(name: "CommentLikes")
+  createdAt: String!
+  post: Post @connection(name: "PostComments")
+}
+
+type Followers @model {
+  id: ID!
+  followerID: String!
+  user: User @connection(name: "UserFollowers")
+}
+
+type Following @model {
+  id: ID!
+  followingID: String!
+  user: User @connection(name: "UserFollowing")
+}
+
+type Likes @model {
+  id: ID!
+  followingID: String!
+  post: Post @connection(name: "PostLikes")
+  comment: Comment @connection(name: "CommentLikes")
+}

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   Text,
   StyleSheet,
@@ -7,12 +6,10 @@ import {
   TouchableOpacity,
   View,
   Image,
-  ImageBackground,
 } from 'react-native';
 import {Input, Icon} from 'react-native-elements';
-import {useSelector, useDispatch} from 'react-redux';
-import {setUser} from '../store/actions';
 import ImagePicker from 'react-native-image-crop-picker';
+import {signUp} from '../src/controllers/auth';
 
 const Register = ({navigation}) => {
   const [image, setImage] = React.useState(null);
@@ -20,16 +17,34 @@ const Register = ({navigation}) => {
   const [email, setEmail] = React.useState(null);
   const [password, setPassword] = React.useState(null);
   const [confirmPassword, setConfirmPassword] = React.useState(null);
-
-  const dispatch = useDispatch();
-  const register = () => {
-    if (password === confirmPassword) {
-      dispatch(setUser({name: name, email: email, password: password}));
+  const register = async () => {
+    // Form validation
+    if (name && email && password && confirmPassword) {
+      if (password === confirmPassword) {
+        let user = {
+          name: name,
+          email: email,
+          password: confirmPassword,
+        };
+        try {
+          let result = await signUp(user);
+          if (result.success) {
+            alert(result.msg);
+            navigation.navigate('Category');
+          } else {
+            alert(result.msg);
+          }
+        } catch (error) {
+          alert('Something went wrong !!');
+        }
+      } else {
+        alert('Passwords do not match !!');
+      }
+    } else {
+      alert('All fields are required !!');
     }
   };
-  const route = () => {
-    navigation.navigate('Category');
-  };
+
   // Choose Image function
   const choosePhoto = () => {
     ImagePicker.openPicker({
@@ -110,7 +125,9 @@ const Register = ({navigation}) => {
           secureTextEntry={true}
         />
       </View>
-      <TouchableOpacity style={styles.logIn} onPress={route}>
+      <TouchableOpacity
+        style={styles.logIn}
+        onPress={() => [navigation.navigate('Category')]}>
         <View>
           <Text style={styles.btnText}>Confirm</Text>
         </View>

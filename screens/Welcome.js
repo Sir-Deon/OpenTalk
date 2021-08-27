@@ -5,7 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-  SafeAreaView,
+  StatusBar,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -65,6 +65,7 @@ const Welcome = ({navigation}) => {
           }}>
           Hosted By Kola
         </Text>
+        <StatusBar backgroundColor="indigo" />
       </LinearGradient>
     </>
   );

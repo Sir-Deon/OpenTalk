@@ -5,6 +5,7 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
+  StatusBar,
 } from 'react-native';
 import {Icon} from 'react-native-elements';
 import Category from './Category';
@@ -87,6 +88,7 @@ const ChooseCategory = ({navigation}) => {
           </View>
         </TouchableOpacity>
       </View>
+      <StatusBar backgroundColor="red" />
     </View>
   );
 };

@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     color: '#bbb',
     fontSize: 12,
     marginLeft: 1,
-    marginTop: 4,
+    marginTop: 2,
   },
   actions: {
     flexDirection: 'row',

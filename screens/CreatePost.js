@@ -6,11 +6,30 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Modal,
 } from 'react-native';
-import {Divider} from 'react-native-elements';
-import {Icon} from 'react-native-elements';
 
+import {Icon} from 'react-native-elements';
+import EmojiSelector from 'react-native-emoji-selector';
+import ImagePicker from 'react-native-image-crop-picker';
 const CreatePost = () => {
+  const [image, setImage] = React.useState(null);
+  const [modalVisible, setModalVisible] = React.useState(false);
+  const [message, setMessage] = React.useState('');
+  // Choose Image function
+  const choosePhoto = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true,
+    })
+      .then(photo => {
+        setImage(photo.path);
+      })
+      .catch(() => {
+        console.log('Rejected !!');
+      });
+  };
   return (
     <View style={styles.container}>
       <View style={styles.profileHead}>
@@ -24,16 +43,28 @@ const CreatePost = () => {
         <TextInput
           style={styles.textArea}
           placeholder="Write your Post"
+          multiline={true}
           placeholderTextColor="#aaa"
           color="#000"
         />
+        {image ? (
+          <TouchableOpacity
+            style={{width: '50%'}}
+            onPress={() => setImage(null)}>
+            <Image style={styles.imgSelect} source={{uri: image}} />
+          </TouchableOpacity>
+        ) : (
+          <Text style={{display: 'none'}}>''</Text>
+        )}
       </View>
       <View style={styles.action}>
         <View style={styles.icons}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => [setModalVisible(true)]}>
             <Icon name="emoji-emotions" color="purple" />
           </TouchableOpacity>
-          <TouchableOpacity style={{marginHorizontal: 20}}>
+          <TouchableOpacity
+            onPress={choosePhoto}
+            style={{marginHorizontal: 20}}>
             <Icon name="camera-alt" color="purple" />
           </TouchableOpacity>
         </View>
@@ -51,6 +82,26 @@ const CreatePost = () => {
           </View>
         </TouchableOpacity>
       </View>
+      <Modal animationType="slide" transparent={false} visible={modalVisible}>
+        <View style={styles.emojiContainer}>
+          <TouchableOpacity
+            style={styles.close}
+            onPress={() => setModalVisible(false)}>
+            <Icon name="chevron-left" color="purple" />
+            <Text
+              style={{fontWeight: 'bold', color: 'purple', marginVertical: 2}}>
+              Close
+            </Text>
+          </TouchableOpacity>
+          <EmojiSelector
+            theme="purple"
+            placeholder="Search..."
+            placeholderTextColor="#aaa"
+            showHistory={true}
+            onEmojiSelected={emoji => setMessage(message + emoji)}
+          />
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -60,6 +111,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
     padding: 10,
+  },
+  imgSelect: {
+    height: 100,
+    width: 100,
+    marginTop: 100,
+    borderRadius: 10,
   },
   profile: {
     width: 50,
@@ -71,18 +128,22 @@ const styles = StyleSheet.create({
   },
   textBox: {
     width: '100%',
-    height: '40%',
+    minHeight: '40%',
     borderBottomColor: '#ccc',
     borderBottomWidth: 1,
+    paddingBottom: 10,
     marginTop: 10,
   },
   textArea: {
     width: '100%',
+    maxHeight: 310,
     justifyContent: 'flex-start',
   },
   action: {
+    marginTop: 10,
     flexDirection: 'row',
     paddingLeft: 10,
+
     justifyContent: 'space-between',
   },
   icons: {
@@ -95,6 +156,17 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 20,
     marginVertical: 10,
+  },
+  emojiContainer: {
+    padding: 20,
+    display: 'flex',
+    height: '100%',
+  },
+
+  close: {
+    flexDirection: 'row',
+    width: 60,
+    height: 30,
   },
 });
 

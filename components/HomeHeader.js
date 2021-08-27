@@ -15,6 +15,7 @@ const HomeHeader = ({title, navigation, shift, aShift}) => {
         <Text style={[styles.title, {left: shift}]}>{title}</Text>
       </View>
       <TouchableOpacity
+        onPress
         style={{
           position: 'relative',
           left: aShift,

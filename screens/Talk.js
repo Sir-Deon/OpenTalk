@@ -85,7 +85,8 @@ const Talk = props => {
           <TextInput
             placeholder="Your comment"
             color="#000"
-            style={{width: '100%'}}
+            multiline={true}
+            style={{width: '100%', maxHeight: 50}}
             placeholderTextColor="purple"
             onChangeText={value => {
               setMessage(value);

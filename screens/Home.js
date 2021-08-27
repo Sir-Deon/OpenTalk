@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, FlatList} from 'react-native';
+import {StyleSheet, View, Text, FlatList, StatusBar} from 'react-native';
 import Post from '../components/Post';
 import ActionButton from 'react-native-action-button';
 
@@ -55,6 +55,7 @@ const Home = ({navigation}) => {
       <ActionButton
         onPress={createPosthandler}
         buttonColor="purple"></ActionButton>
+      <StatusBar backgroundColor="purple" />
     </View>
   );
 };
