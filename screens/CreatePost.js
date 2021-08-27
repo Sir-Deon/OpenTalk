@@ -82,7 +82,7 @@ const CreatePost = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <Modal animationType="slide" transparent={false} visible={modalVisible}>
+      <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <View style={styles.emojiContainer}>
           <TouchableOpacity
             style={styles.close}
@@ -158,9 +158,11 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   emojiContainer: {
+    backgroundColor: 'white',
     padding: 20,
     display: 'flex',
     height: '100%',
+    marginTop: '80%',
   },
 
   close: {
