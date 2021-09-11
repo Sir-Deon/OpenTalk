@@ -7,17 +7,21 @@ import {
   View,
   Image,
 } from 'react-native';
-import {Input, Icon} from 'react-native-elements';
+import {Input, Icon, LinearProgress} from 'react-native-elements';
 import ImagePicker from 'react-native-image-crop-picker';
-import {signUp} from '../src/controllers/auth';
+import {AuthContext} from '../context';
 
 const Register = ({navigation}) => {
+  const [isLoading, setIsLoading] = React.useState(false);
+  const {signUp} = React.useContext(AuthContext);
   const [image, setImage] = React.useState(null);
   const [name, setName] = React.useState(null);
   const [email, setEmail] = React.useState(null);
   const [password, setPassword] = React.useState(null);
   const [confirmPassword, setConfirmPassword] = React.useState(null);
+
   const register = async () => {
+    setIsLoading(true);
     // Form validation
     if (name && email && password && confirmPassword) {
       if (password === confirmPassword) {
@@ -35,12 +39,15 @@ const Register = ({navigation}) => {
             alert(result.msg);
           }
         } catch (error) {
+          setIsLoading(false);
           alert('Something went wrong !!');
         }
       } else {
+        setIsLoading(false);
         alert('Passwords do not match !!');
       }
     } else {
+      setIsLoading(false);
       alert('All fields are required !!');
     }
   };
@@ -125,13 +132,17 @@ const Register = ({navigation}) => {
           secureTextEntry={true}
         />
       </View>
-      <TouchableOpacity
-        style={styles.logIn}
-        onPress={() => [navigation.navigate('Category')]}>
+      <TouchableOpacity style={styles.logIn} onPress={register}>
         <View>
           <Text style={styles.btnText}>Confirm</Text>
         </View>
       </TouchableOpacity>
+
+      {isLoading ? (
+        <LinearProgress style={{marginVertical: 40}} color="purple" />
+      ) : (
+        <Text></Text>
+      )}
     </ScrollView>
   );
 };

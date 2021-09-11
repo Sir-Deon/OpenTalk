@@ -440,7 +440,6 @@ export const listLikes = /* GraphQL */ `
 export const userByEmail = /* GraphQL */ `
   query UserByEmail(
     $email: String
-    $name: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelUserFilterInput
     $limit: Int
@@ -448,7 +447,6 @@ export const userByEmail = /* GraphQL */ `
   ) {
     userByEmail(
       email: $email
-      name: $name
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit

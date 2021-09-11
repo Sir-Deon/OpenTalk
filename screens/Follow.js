@@ -11,40 +11,14 @@ import {Icon} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import Friend from '../components/Friend';
 import {AuthContext} from '../context';
-
-const followers = [
-  {
-    name: 'Mike',
-    alias: '@benz',
-    followed: false,
-  },
-  {
-    name: 'Boss',
-    alias: '@benz',
-    followed: false,
-  },
-  {
-    name: 'Elad',
-    alias: '@benz',
-    followed: false,
-  },
-  {
-    name: 'Meg',
-    alias: '@benz',
-    followed: false,
-  },
-  {
-    name: 'Boti',
-    alias: '@benz',
-    followed: false,
-  },
-  {
-    name: 'Boti',
-    alias: '@benz',
-    followed: false,
-  },
-];
-const Follow = ({navigation}) => {
+import {getUsers} from '../src/controllers/main';
+const Follow = () => {
+  const [users, setUsers] = React.useState([]);
+  const {gotoApp} = React.useContext(AuthContext);
+  React.useEffect(async () => {
+    let data = await getUsers();
+    setUsers(data);
+  }, []);
   return (
     <>
       <LinearGradient colors={['indigo', 'purple']} style={styles.top}>
@@ -67,14 +41,14 @@ const Follow = ({navigation}) => {
         </Text>
 
         <ScrollView>
-          <View style={[styles.main, {height: followers.length + 1000}]}>
-            {followers.map((item, index) => {
+          <View style={[styles.main, {height: users.length + 1000}]}>
+            {users.map((item, index) => {
               return <Friend key={index} friend={item} />;
             })}
           </View>
         </ScrollView>
 
-        <TouchableOpacity style={styles.next}>
+        <TouchableOpacity style={styles.next} onPress={gotoApp}>
           <View style={styles.text}>
             <Text style={styles.nextText}>Next Step</Text>
             <Icon name="chevron-right" color="white" />

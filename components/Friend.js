@@ -1,12 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, Image, View} from 'react-native';
 import {Icon} from 'react-native-elements';
+import {follow} from '../src/controllers/main';
 const Friend = ({friend}) => {
   const [following, setFollowing] = React.useState(false);
-  const follow = () => {
-    if (following) {
-      setFollowing(false);
-    } else {
+  const followUser = () => {
+    if (!following) {
+      follow(friend);
       setFollowing(true);
     }
   };
@@ -20,7 +20,9 @@ const Friend = ({friend}) => {
         source={require('../assets/music.jpg')}
       />
       <Text style={{fontWeight: 'bold'}}> {friend.name} </Text>
-      <Text style={{fontSize: 10, color: '#aaa'}}> {friend.alias} </Text>
+      <Text style={{fontSize: 10, color: '#aaa'}}>
+        @{friend.name.split(' ')[1]}
+      </Text>
       <View
         style={{
           width: '100%',
@@ -29,8 +31,8 @@ const Friend = ({friend}) => {
           marginTop: 2,
         }}></View>
       <TouchableOpacity
-        style={[styles.btn, {opacity: following ? 1 : 0.5}]}
-        onPress={follow}>
+        style={[styles.btn, {opacity: following ? 0.5 : 1}]}
+        onPress={followUser}>
         {following ? (
           <Text style={{color: '#fff'}}>
             Followed

@@ -12,7 +12,7 @@ const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
-        name="#"
+        name="home"
         component={Home}
         options={navigation => {
           return {

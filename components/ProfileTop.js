@@ -2,7 +2,10 @@ import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
 import {Icon} from 'react-native-elements';
 import ImagePicker from 'react-native-image-crop-picker';
+import {AuthContext} from '../context';
 const ProfileTop = ({navigation}) => {
+  const {signOut} = React.useContext(AuthContext);
+
   const choosePhoto = () => {
     ImagePicker.openPicker({
       width: 300,
@@ -16,6 +19,7 @@ const ProfileTop = ({navigation}) => {
         console.log('Rejected !!');
       });
   };
+
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={require('../assets/music.jpg')} />
@@ -28,11 +32,17 @@ const ProfileTop = ({navigation}) => {
           <Text style={{color: '#aaa'}}>@man</Text>
           <Text style={{color: '#aaa'}}>dev@menubar.com</Text>
         </View>
-        <TouchableOpacity
-          onPress={() => [navigation.navigate('Edit Profile')]}
-          style={{marginHorizontal: 70, height: 50, width: 50}}>
-          <Icon name="edit" color="purple" />
-        </TouchableOpacity>
+
+        <View style={{marginHorizontal: 70, height: 50, width: 50}}>
+          <TouchableOpacity
+            onPress={() => [navigation.navigate('Edit Profile')]}
+            style={{height: 50, width: 50}}>
+            <Icon name="edit" color="purple" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => [signOut()]}>
+            <Text style={{color: 'purple', fontWeight: 'bold'}}>Log Out</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

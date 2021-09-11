@@ -16,30 +16,6 @@ const posts = [
     time: '35min',
     commenst: [],
   },
-  {
-    id: '2',
-    name: 'Angela Man',
-    alias: '@migo',
-    profile: require('../assets/music.jpg'),
-    text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia corporis deserunt inventore officia temporibus illum facere, voluptatibus beatae, dolorem, quidem dolor corrupti nobis ea architecto esse porro fugit culpa sint.',
-    likes: 0,
-    commentNum: 2,
-    image: require('../assets/music.jpg'),
-    time: '35min',
-    commenst: [],
-  },
-  {
-    id: '3',
-    name: 'Angela Man',
-    alias: '@migo',
-    profile: require('../assets/music.jpg'),
-    text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia corporis deserunt inventore officia temporibus illum facere, voluptatibus beatae, dolorem, quidem dolor corrupti nobis ea architecto esse porro fugit culpa sint.',
-    likes: 0,
-    commentNum: 2,
-    image: require('../assets/music.jpg'),
-    time: '35min',
-    commenst: [],
-  },
 ];
 const Home = ({navigation}) => {
   const createPosthandler = () => {

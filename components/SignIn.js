@@ -6,20 +6,20 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {Input} from 'react-native-elements';
+import {Input, LinearProgress} from 'react-native-elements';
 import {AuthContext} from '../context';
-import {useSelector, useDispatch} from 'react-redux';
-import {setUser} from '../store/actions';
 
 const SignIn = () => {
-  const {user} = useSelector(state => state.userReducer);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [email, setEmail] = React.useState(null);
   const [password, setPassword] = React.useState(null);
+  const {signIn} = React.useContext(AuthContext);
 
-  const dispatch = useDispatch();
-  const login = () => {
-    dispatch(setUser({email: email, password: password}));
+  const confirm = () => {
+    setIsLoading(true);
+    signIn(email, password);
   };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.containerText}>
@@ -28,6 +28,7 @@ const SignIn = () => {
       <View style={styles.inputs}>
         <Input
           placeholder="Email"
+          value={email}
           rightIcon={{
             type: 'font-awesome',
             name: true ? 'envelope' : 'check',
@@ -38,6 +39,7 @@ const SignIn = () => {
         />
         <Input
           placeholder="Password"
+          value={password}
           rightIcon={{
             type: 'font-awesome',
             name: true ? 'eye-slash' : 'eye',
@@ -48,11 +50,17 @@ const SignIn = () => {
           secureTextEntry={true}
         />
       </View>
-      <TouchableOpacity style={styles.logInBtn} onPress={login}>
+      <TouchableOpacity style={styles.logInBtn} onPress={confirm}>
         <View>
           <Text style={styles.btnText}>Confirm</Text>
         </View>
       </TouchableOpacity>
+
+      {isLoading ? (
+        <LinearProgress style={{marginVertical: 50}} color="purple" />
+      ) : (
+        <Text></Text>
+      )}
     </ScrollView>
   );
 };

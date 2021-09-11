@@ -32,11 +32,23 @@ export const signUp = async payload => {
   } catch (err) {
     return {
       success: false,
-      msg: 'Somethin went wrong !!',
+      msg: 'Something went wrong !!',
     };
   }
 };
 
-export const signIn = async () => {};
-
-export const signOut = async () => {};
+export const signIn = async (email, password) => {
+  const users = await API.graphql({query: listUsers});
+  let is_user = false;
+  let id = '';
+  users.data.listUsers.items.map(user => {
+    if (user.email === email) {
+      if (user.password === password) {
+        id = user.id;
+        is_user = true;
+      }
+    }
+  });
+  await AsyncStorage.setItem('auth_token', id);
+  return is_user;
+};

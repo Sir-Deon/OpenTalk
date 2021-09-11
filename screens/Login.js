@@ -15,7 +15,7 @@ const Login = ({navigation}) => {
         <Image style={styles.logo} source={require('../assets/logo.png')} />
         <Text style={styles.title}>OpenTalk</Text>
       </LinearGradient>
-      <SignIn />
+      <SignIn navigation={navigation} />
     </>
   );
 };
