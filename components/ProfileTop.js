@@ -33,7 +33,7 @@ const ProfileTop = ({navigation}) => {
           <Text style={{color: '#aaa'}}>dev@menubar.com</Text>
         </View>
 
-        <View style={{marginHorizontal: 70, height: 50, width: 50}}>
+        <View style={{marginHorizontal: 50, height: 50, width: 100}}>
           <TouchableOpacity
             onPress={() => [navigation.navigate('Edit Profile')]}
             style={{height: 50, width: 50}}>

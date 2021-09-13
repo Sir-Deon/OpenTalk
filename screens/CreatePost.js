@@ -9,13 +9,24 @@ import {
   Modal,
 } from 'react-native';
 
-import {Icon} from 'react-native-elements';
+import {Icon, LinearProgress} from 'react-native-elements';
 import EmojiSelector from 'react-native-emoji-selector';
 import ImagePicker from 'react-native-image-crop-picker';
+import {update} from '../state';
 const CreatePost = () => {
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const [image, setImage] = React.useState(null);
   const [modalVisible, setModalVisible] = React.useState(false);
   const [message, setMessage] = React.useState('');
+
+  const createPost = async () => {
+    setIsLoading(true);
+    if (message) {
+      update(message);
+      setIsLoading(false);
+    }
+  };
   // Choose Image function
   const choosePhoto = () => {
     ImagePicker.openPicker({
@@ -43,6 +54,7 @@ const CreatePost = () => {
         <TextInput
           style={styles.textArea}
           placeholder="Write your Post"
+          onChangeText={value => setMessage(value)}
           multiline={true}
           placeholderTextColor="#aaa"
           color="#000"
@@ -68,7 +80,7 @@ const CreatePost = () => {
             <Icon name="camera-alt" color="purple" />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={createPost}>
           <View style={styles.postBtn}>
             <Text
               style={{
@@ -82,6 +94,11 @@ const CreatePost = () => {
           </View>
         </TouchableOpacity>
       </View>
+      {isLoading ? (
+        <LinearProgress style={{marginVertical: 40}} color="purple" />
+      ) : (
+        <Text></Text>
+      )}
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <View style={styles.emojiContainer}>
           <TouchableOpacity

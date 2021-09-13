@@ -2,21 +2,8 @@ import React from 'react';
 import {StyleSheet, View, Text, FlatList, StatusBar} from 'react-native';
 import Post from '../components/Post';
 import ActionButton from 'react-native-action-button';
+import {posts} from '../state';
 
-const posts = [
-  {
-    id: '1',
-    name: 'Angela Man',
-    alias: '@migo',
-    profile: require('../assets/music.jpg'),
-    text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia corporis deserunt inventore officia temporibus illum facere, voluptatibus beatae, dolorem, quidem dolor corrupti nobis ea architecto esse porro fugit culpa sint.',
-    likes: 0,
-    commentNum: 2,
-    image: require('../assets/music.jpg'),
-    time: '35min',
-    commenst: [],
-  },
-];
 const Home = ({navigation}) => {
   const createPosthandler = () => {
     navigation.navigate('Create Post');
@@ -24,7 +11,7 @@ const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
       <FlatList
-        keyExtractor={item => item.id}
+        keyExtractor={(item, index) => index}
         data={posts}
         renderItem={({item}) => <Post post={item} navigation={navigation} />}
       />

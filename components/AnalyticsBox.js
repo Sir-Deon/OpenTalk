@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
     minHeight: 20,
     flexDirection: 'row',
     justifyContent: 'center',
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: 50,
+    paddingRight: 50,
   },
   noPosts: {
     padding: 10,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
   },
   followers: {
-    padding: 10,
+    padding: 5,
     justifyContent: 'center',
     marginTop: 20,
     backgroundColor: 'white',

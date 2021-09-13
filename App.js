@@ -8,7 +8,7 @@ import Splash from './screens/Splash';
 import {AuthContext} from './context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {signIn, signUp} from './src/controllers/auth';
-
+import {post} from './src/controllers/main';
 // Creating root stack Navigators
 const RootStack = createStackNavigator();
 const RootStackScreen = ({userToken}) => {
@@ -60,6 +60,10 @@ const App = () => {
       gotoApp: async () => {
         let token = await AsyncStorage.getItem('auth_token');
         setUserToken(token);
+      },
+      makePost: async arg => {
+        let result = await post(arg);
+        return result;
       },
     };
   }, []);
